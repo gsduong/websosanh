@@ -64,4 +64,20 @@ class CellphonesSpider(scrapy.Spider):
         item['regular_price'] = re.sub('[^0-9.]', '', regular_price)
         sale_price = response.css('#price::text').extract_first()
         item['sale_price'] = re.sub('[^0-9.]', '', sale_price)
+        item['provider'] = {
+            "name": "Cellphones",
+            "homepage": "https://cellphones.com.vn",
+            "logo_url": "https://cellphones.com.vn/skin/frontend/default/blank/images/logo.png"
+        }
+
+        # details
+        res = response.xpath('.//div[@class="content-thongso"]/ul/li')
+        details = {}
+        for li in res:
+            key = li.xpath('.//text()').extract_first()
+            key = key.replace(":", "")
+            value_node = li.xpath('.//node()')[2]
+            value = value_node.extract()
+            details.update({key:value})
+        item['details'] = details
         yield item
