@@ -28,3 +28,12 @@ class CellphonesItem(scrapy.Item):
     sale_price = scrapy.Field()
     url = scrapy.Field()
     image_url = scrapy.Field()
+
+class AdayroiItem(scrapy.Item):
+    title = scrapy.Field()
+    category = scrapy.Field()
+    regular_price = scrapy.Field()
+    sale_price = scrapy.Field()
+    product_saving = scrapy.Field()
+    url = scrapy.Field()
+    image_url = scrapy.Field()
