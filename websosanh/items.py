@@ -12,3 +12,9 @@ class LazadaItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     title = scrapy.Field()
+    category = scrapy.Field()
+    regular_price = scrapy.Field()
+    sale_price = scrapy.Field()
+    product_saving = scrapy.Field()
+    url = scrapy.Field()
+    image_url = scrapy.Field()
