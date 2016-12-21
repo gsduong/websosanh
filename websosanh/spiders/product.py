@@ -4,7 +4,7 @@ from websosanh.items import LazadaItem
 class LazadaSpider(scrapy.Spider):
     name = "lazada"
     allowed_domains = ["lazada.vn"]
-    start_urls = ["http:\/\/www.lazada.vn"]
+    start_urls = ["http://www.lazada.vn/"]
 
     def parse(self, response): # looking for links of parent categories
         nav_wrapper = response.xpath('.//*[@class="c-second-menu__item c-second-menu__item_style_heading2"]/a/@href')
@@ -15,10 +15,7 @@ class LazadaSpider(scrapy.Spider):
                 links.append(str(i.extract()))
 
         links.pop() # Remove last item for error solving
-        for href in links:
-            url = href.extract()
-            if ":" not in url:
-                sys.exit(0)
+        for url in links:
             yield scrapy.Request(url, callback=self.parse_all_pagination)   # each url is a link to a parent category, each category has many paginations
 
 
@@ -35,8 +32,6 @@ class LazadaSpider(scrapy.Spider):
         pagination_links = [response.urljoin("?page=")+`page` for page in range(min(page_number), max(page_number) + 1)]
 
         for url in pagination_links:
-            if ":" not in url:
-                sys.exit(0)
             yield scrapy.Request(url, callback=self.parse_each_pagination)  # each pagination has many products
 
     def parse_each_pagination(self, response):                              # get links of all product in each pagination
