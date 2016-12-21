@@ -39,6 +39,8 @@ class AdayroiItem(scrapy.Item):
     product_saving = scrapy.Field()
     url = scrapy.Field()
     image_url = scrapy.Field()
+    provider = scrapy.Field()
+    details = scrapy.Field()
 
 class Provider(scrapy.Item):
     homepage = scrapy.Field()

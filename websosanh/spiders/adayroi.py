@@ -69,4 +69,16 @@ class AdayroiSpider(scrapy.Spider):
         regular_price = response.xpath('.//span[contains(@class,"value") and contains(@class,"original")]/text()').extract_first()
         item['regular_price'] = re.sub('[^0-9.]', '', regular_price)
         item['product_saving'] = response.xpath('.//span[contains(@class,"rate") and contains(@class,"discount")]/text()').extract_first()
+        provider = {
+            "name": "ADAYROI",
+            "homepage": "https://www.adayroi.com/",
+            "logo_url": "https://cdn02.static-adayroi.com/0/2016/06/01/1464765984826_4341704.jpg"
+        }
+        item['provider'] = provider
+        details = {}
+        for attr in response.xpath('.//tr[contains(@class,"row-info")]'):
+            key = attr.xpath('.//td')[0].xpath('.//text()').extract_first()
+            value = attr.xpath('.//td')[1].xpath('.//text()').extract_first()
+            details.update({key:value})
+        item['details'] = details
         yield item
