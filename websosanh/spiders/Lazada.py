@@ -71,4 +71,16 @@ class LazadaSpider(scrapy.Spider):
         item['sale_price'] = str(response.css('#special_price_box::text').extract_first())
         item['product_saving'] = str(response.css('#product_saving_percentage::text').extract_first())
         item['regular_price'] = str(response.css('#price_box::text').extract_first()).replace(" VND,", "")
+        provider = {
+            "name": "LAZADA VN",
+            "homepage": "http://www.lazada.vn/",
+            "logo_url": "http://static.lazada.vn/cms/awb/Master-Logo.jpg"
+        }
+        item['provider'] = provider
+        details = {}
+        for attr in response.xpath('.//table[@class="specification-table"]//tr'):
+            key = attr.xpath('.//td')[0].xpath('.//text()').extract_first()
+            value = attr.xpath('.//td')[1].xpath('.//text()').extract_first()
+            details.update({key:value})
+        item['details'] = details
         yield item

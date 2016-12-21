@@ -18,6 +18,8 @@ class LazadaItem(scrapy.Item):
     product_saving = scrapy.Field()
     url = scrapy.Field()
     image_url = scrapy.Field()
+    provider = scrapy.Field()
+    details = scrapy.Field()
 
 class CellphonesItem(scrapy.Item):
     # define the fields for your item here like:
