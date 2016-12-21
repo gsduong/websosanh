@@ -58,17 +58,17 @@ class LazadaSpider(scrapy.Spider):
         item = response.meta['item']
         item['url'] = response.urljoin("")
 
-        item['title'] = response.xpath('.//title/text()').extract()
+        item['title'] = response.xpath('.//title/text()').extract_first()
 
 
         # image_url
         res = response.css('#productImageBox')
         res = res.xpath('.//ul/li/div/div')[0]
         res = res.xpath('.//@data-swap-image')
-        item['image_url'] = res.extract()
+        item['image_url'] = res.extract_first()
 
         # price
-        item['sale_price'] = str(response.css('#special_price_box::text').extract())
-        item['product_saving'] = str(response.css('#product_saving_percentage::text').extract())
-        item['regular_price'] = str(response.css('#price_box::text').extract()).replace(" VND,", "")
+        item['sale_price'] = str(response.css('#special_price_box::text').extract_first())
+        item['product_saving'] = str(response.css('#product_saving_percentage::text').extract_first())
+        item['regular_price'] = str(response.css('#price_box::text').extract_first()).replace(" VND,", "")
         yield item
