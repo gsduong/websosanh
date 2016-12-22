@@ -26,6 +26,7 @@ class LazadaSpider(scrapy.Spider):
 
     def parse(self, response):
         item = LazadaItem()
+        item['homepage'] = "http://www.lazada.vn"
         category_dict = {
             "http://www.lazada.vn/dien-thoai-di-dong/": 'cellphone',
             "http://www.lazada.vn/may-tinh-bang/": 'tablet',
@@ -76,7 +77,7 @@ class LazadaSpider(scrapy.Spider):
             "homepage": "http://www.lazada.vn/",
             "logo_url": "http://static.lazada.vn/cms/awb/Master-Logo.jpg"
         }
-        item['provider'] = provider
+        # item['provider'] = provider
         details = {}
         for attr in response.xpath('.//table[@class="specification-table"]//tr'):
             key = attr.xpath('.//td')[0].xpath('.//text()').extract_first()

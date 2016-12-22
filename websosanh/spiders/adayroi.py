@@ -28,6 +28,7 @@ class AdayroiSpider(scrapy.Spider):
 
     def parse(self, response):
         item = AdayroiItem()
+        item['homepage'] = "https://www.adayroi.com"
         category_dict = {
             "https://www.adayroi.com/dien-thoai-di-dong-m323": 'cellphone',
             "https://www.adayroi.com/may-tinh-bang-m328": 'tablet',
@@ -74,7 +75,7 @@ class AdayroiSpider(scrapy.Spider):
             "homepage": "https://www.adayroi.com/",
             "logo_url": "https://cdn02.static-adayroi.com/0/2016/06/01/1464765984826_4341704.jpg"
         }
-        item['provider'] = provider
+        #item['provider'] = provider
         details = {}
         for attr in response.xpath('.//tr[contains(@class,"row-info")]'):
             key = attr.xpath('.//td')[0].xpath('.//text()').extract_first()

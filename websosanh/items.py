@@ -18,8 +18,9 @@ class LazadaItem(scrapy.Item):
     product_saving = scrapy.Field()
     url = scrapy.Field()
     image_url = scrapy.Field()
-    provider = scrapy.Field()
+    #provider = scrapy.Field()
     details = scrapy.Field()
+    homepage = scrapy.Field()
 
 class CellphonesItem(scrapy.Item):
     # define the fields for your item here like:
@@ -30,8 +31,9 @@ class CellphonesItem(scrapy.Item):
     sale_price = scrapy.Field()
     url = scrapy.Field()
     image_url = scrapy.Field()
-    provider = scrapy.Field()
+    #provider = scrapy.Field()
     details = scrapy.Field()
+    homepage = scrapy.Field()
 
 class AdayroiItem(scrapy.Item):
     title = scrapy.Field()
@@ -41,8 +43,9 @@ class AdayroiItem(scrapy.Item):
     product_saving = scrapy.Field()
     url = scrapy.Field()
     image_url = scrapy.Field()
-    provider = scrapy.Field()
+    #provider = scrapy.Field()
     details = scrapy.Field()
+    homepage = scrapy.Field()
 
 class Provider(scrapy.Item):
     homepage = scrapy.Field()

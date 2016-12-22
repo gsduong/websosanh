@@ -27,7 +27,7 @@ class CellphonesSpider(scrapy.Spider):
         category_dict = {
             "https://cellphones.com.vn/mobile.html": 'cellphone'
         }
-
+        item['homepage'] = "https://cellphones.com.vn"
         category_url = response.urljoin("")
         item['category'] = category_dict[category_url]
         nav_pagination = response.xpath('.//div[@class="pages"]//li/a/@href')
@@ -64,11 +64,11 @@ class CellphonesSpider(scrapy.Spider):
         item['regular_price'] = re.sub('[^0-9.]', '', regular_price)
         sale_price = response.css('#price::text').extract_first()
         item['sale_price'] = re.sub('[^0-9.]', '', sale_price)
-        item['provider'] = {
-            "name": "Cellphones",
-            "homepage": "https://cellphones.com.vn",
-            "logo_url": "https://cellphones.com.vn/skin/frontend/default/blank/images/logo.png"
-        }
+        # item['provider'] = {
+        #     "name": "Cellphones",
+        #     "homepage": "https://cellphones.com.vn",
+        #     "logo_url": "https://cellphones.com.vn/skin/frontend/default/blank/images/logo.png"
+        # }
 
         # details
         res = response.xpath('.//div[@class="content-thongso"]/ul/li')
